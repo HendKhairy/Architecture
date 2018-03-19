@@ -1,5 +1,5 @@
 
-/* Author: Hend Khairy */
+/* Author: Sarah Diaa */
 /* Date : 16 Feburary  2018 */
 /* Version : V01 */
 
@@ -98,5 +98,55 @@ void DIO_SetPinValue(u8 Copy_u8PinNum,u8 Copy_u8PinValue)
 		
 	}
 	
+}
+
+u8 DIO_u8GETPinValue(u8 Copy_u8PinNum)
+{
+	u8 Copy_u8PinValue;
 	
+	/* Find port A pins*/
+	if ( (Copy_u8PinNum >= DIO_u8_PORTA_START) && (Copy_u8PinNum <= DIO_u8_PORTA_END) )
+	{
+		/* Get valid range for port A*/
+		//Copy_u8PinNum = Copy_u8PinNum -
+
+		Copy_u8PinValue = GET_BIT(PINA,Copy_u8PinNum);
+
+		return Copy_u8PinValue;
+	}
+
+
+	/* Find port B pins*/
+	else if ( (Copy_u8PinNum >= DIO_u8_PORTB_START) && (Copy_u8PinNum <= DIO_u8_PORTB_END) )
+	{
+		/* Get valid range for port B pins*/
+		Copy_u8PinNum = Copy_u8PinNum - DIO_u8_PORTA_SIZE;
+
+		Copy_u8PinValue = GET_BIT(PINB,Copy_u8PinNum);
+
+		return Copy_u8PinValue;
+	}
+
+
+	/* Find port C pins*/
+	else if ( (Copy_u8PinNum >= DIO_u8_PORTC_START) && (Copy_u8PinNum <= DIO_u8_PORTC_END) )
+	{
+		/* Get valid range for port C*/
+		Copy_u8PinNum = Copy_u8PinNum - (DIO_u8_PORTA_SIZE +DIO_u8_PORTB_SIZE);
+
+		Copy_u8PinValue = GET_BIT(PINC,Copy_u8PinNum);
+		return Copy_u8PinValue;
+	}
+
+
+	/* Find port D pins*/
+	else if ( (Copy_u8PinNum >= DIO_u8_PORTD_START) && (Copy_u8PinNum <= DIO_u8_PORTD_END) )
+	{
+		/* Get valid range for port D*/
+		Copy_u8PinNum = Copy_u8PinNum - (DIO_u8_PORTA_SIZE +DIO_u8_PORTB_SIZE+DIO_u8_PORTC_SIZE);
+
+		Copy_u8PinValue = GET_BIT(PIND,Copy_u8PinNum);
+		return Copy_u8PinValue;
+
+	}
 }
